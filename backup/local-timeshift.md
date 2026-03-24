@@ -1,25 +1,25 @@
-# Backup local — Timeshift
+# Local Backup — Timeshift
 
-## Rôle
+## Purpose
 
-Snapshots du système (OS, configs, paquets). Permet un rollback rapide après une mise à jour ou une mauvaise manipulation système.
+System snapshots (OS, config files, packages). Allows quick rollback after a system update or accidental change.
 
-Ne sauvegarde **pas** les données utilisateur (géré par Borg).
+Does **not** back up user/application data (handled by Borg).
 
 ## Configuration
 
-- Destination : `/mnt/timeshift` (SSD SanDisk 240 Go dédié)
-- Type : RSYNC
-- Rétention : 7 snapshots quotidiens
-- Déclenchement : timer systemd custom (`timeshift-daily.timer`)
+- Destination: `/mnt/timeshift` (dedicated SSD)
+- Type: RSYNC
+- Retention: 7 daily snapshots
+- Trigger: custom systemd timer (`timeshift-daily.timer`)
 
-## Déclenchement manuel
+## Manual snapshot
 
 ```bash
-sudo timeshift --create --comments "avant mise à jour" --tags D
+sudo timeshift --create --comments "before update" --tags D
 ```
 
-## Lister les snapshots disponibles
+## List available snapshots
 
 ```bash
 sudo timeshift --list

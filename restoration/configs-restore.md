@@ -1,25 +1,25 @@
-# Restauration des configs système
+# System Config Restoration
 
-Les configs système sont versionnées dans le repo `homelab-config` sur Forgejo.
+System config files are versioned in a dedicated Git repository (`homelab-config`).
 
-## Cloner le repo
+## Clone the repo
 
 ```bash
-git clone git@forgejo.example.com:Homelab/homelab-config.git
+git clone git@<your-git-server>:<org>/homelab-config.git
 cd homelab-config
 ```
 
-## Restaurer un fichier
+## Restore a single file
 
-Le chemin relatif dans `configs/` correspond au chemin absolu sur le système.
+The relative path in `configs/` mirrors the absolute path on the system.
 
 ```bash
-# Exemple
+# Examples
 cp configs/etc/ssh/sshd_config /etc/ssh/sshd_config
 cp configs/etc/docker/daemon.json /etc/docker/daemon.json
 ```
 
-## Restaurer tous les fichiers d'un coup
+## Restore all files at once
 
 ```bash
 cd homelab-config
@@ -27,14 +27,14 @@ find configs/ -type f | while read src; do
   dest="/${src#configs/}"
   mkdir -p "$(dirname "$dest")"
   cp "$src" "$dest"
-  echo "Restauré : $dest"
+  echo "Restored: $dest"
 done
 ```
 
-⚠️ Les valeurs `REDACTED` dans les fichiers copiés doivent être remplacées manuellement par les vraies valeurs (disponibles dans Vaultwarden).
+⚠️ Files containing `REDACTED` values must be updated manually with the real values (available in Vaultwarden).
 
-## Fichiers couverts
+## What is covered
 
-Voir `manifest.md` dans le repo `homelab-config` pour la liste complète.
+See `manifest.md` in the `homelab-config` repo for the full list.
 
-Principaux : `sshd_config`, `docker/daemon.json`, `fstab`, `hosts`, `resolv.conf`, `sysctl.d/`, `systemd/system/` (services custom), `stunnel/`, `timeshift/`, crontabs, sources APT.
+Key files: `sshd_config`, `docker/daemon.json`, `fstab`, `hosts`, `resolv.conf`, `sysctl.d/`, custom `systemd/system/` units, crontabs, APT sources.

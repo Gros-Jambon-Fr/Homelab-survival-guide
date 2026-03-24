@@ -1,25 +1,24 @@
-# Backup offsite — Timeshift → Hetzner via Restic
+# Offsite Backup — Timeshift → Hetzner via Restic
 
-## Rôle
+## Purpose
 
-Envoi des snapshots Timeshift vers Hetzner Storage Box via Restic. Restic ajoute déduplication et chiffrement natifs.
+Send Timeshift snapshots to Hetzner Storage Box via Restic. Restic adds native deduplication and encryption.
 
-## Fonctionnement
+## How it works
 
 ```
-/mnt/timeshift  →  Restic  →  Hetzner Storage Box (rclone/borg/)
+/mnt/timeshift  →  Restic  →  Hetzner Storage Box
 ```
 
-- Chiffrement natif Restic (clé dans Vaultwarden)
-- Rétention : `--keep-daily 7`
-- Stockage actuel : ~9 Go sur Hetzner
+- Native Restic encryption (key stored in Vaultwarden)
+- Retention: `--keep-daily 7`
 
-## Commandes utiles
+## Useful commands
 
 ```bash
-# Lister les snapshots
+# List snapshots
 restic -r <repo> snapshots
 
-# Vérifier l'intégrité
+# Check repository integrity
 restic -r <repo> check
 ```

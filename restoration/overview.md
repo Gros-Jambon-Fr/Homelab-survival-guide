@@ -1,33 +1,33 @@
-# Restauration — Par où commencer ?
+# Restoration — Where to start?
 
-## Identifier le scénario
+## Identify your scenario
 
-### Scénario 1 — Rollback après une mise à jour / mauvaise manip système
-→ [Restauration Timeshift](system-restore.md#timeshift)
+### Scenario 1 — Rollback after a bad update or system mistake
+→ [Timeshift restoration](system-restore.md#timeshift)
 
-### Scénario 2 — Perte de données applicatives (Immich, Nextcloud, etc.)
-→ [Restauration Borg](data-restore.md)
+### Scenario 2 — Loss of application data (Immich, Nextcloud, etc.)
+→ [Borg restoration](data-restore.md)
 
-### Scénario 3 — Disque système mort
-1. Réinstaller Debian
-2. Restaurer les configs système depuis `homelab-config` → [Restauration configs](configs-restore.md)
-3. Restaurer les données depuis Borg → [Restauration Borg](data-restore.md)
-4. Remonter les conteneurs Docker depuis les compose
+### Scenario 3 — Dead system drive
+1. Reinstall Debian
+2. Restore system config files from the configs repo → [Config restoration](configs-restore.md)
+3. Restore application data from Borg → [Borg restoration](data-restore.md)
+4. Bring Docker containers back up from compose files
 
-### Scénario 4 — Serveur complètement irrécupérable (vol, incendie, etc.)
-1. Nouveau matériel + Réinstaller Debian
-2. **Récupérer l'accès à Vaultwarden** → [Chaîne de récupération](vaultwarden-chain.md)
-3. Récupérer les clés de chiffrement (rclone, Restic) depuis Vaultwarden
-4. Restaurer depuis Hetzner (Borg via rclone / Timeshift via Restic)
-5. Restaurer les configs système depuis Forgejo (`homelab-config`)
-6. Remonter les conteneurs Docker
+### Scenario 4 — Server completely unrecoverable (theft, fire, etc.)
+1. New hardware + reinstall Debian
+2. **Regain access to Vaultwarden** → [Recovery chain](vaultwarden-chain.md)
+3. Retrieve encryption keys (rclone, Restic) from Vaultwarden
+4. Restore from Hetzner (Borg via rclone / Timeshift via Restic)
+5. Restore system configs from the configs repo
+6. Bring Docker containers back up from compose files
 
-### Scénario 5 — Perte d'accès à Vaultwarden uniquement
-→ [Chaîne de récupération Vaultwarden](vaultwarden-chain.md)
+### Scenario 5 — Lost access to Vaultwarden only
+→ [Vaultwarden recovery chain](vaultwarden-chain.md)
 
-## Priorité de récupération
+## Recovery priority
 
-1. ProtonMail (point d'entrée de tout)
-2. Vaultwarden (contient tous les autres secrets)
-3. Infisical (secrets applicatifs)
-4. Services Docker
+1. ProtonMail (entry point for everything)
+2. Vaultwarden (holds all other secrets)
+3. Secrets manager (application secrets)
+4. Docker services

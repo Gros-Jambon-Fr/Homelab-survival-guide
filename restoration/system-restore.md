@@ -1,29 +1,29 @@
-# Restauration système
+# System Restoration
 
-## Timeshift — Rollback rapide
+## Timeshift — Quick rollback
 
-Idéal pour annuler une mise à jour ou une mauvaise manipulation.
+Best option to undo a bad update or system change.
 
 ```bash
-# Lister les snapshots disponibles
+# List available snapshots
 sudo timeshift --list
 
-# Restaurer un snapshot (remplacer <nom> par le nom du snapshot)
-sudo timeshift --restore --snapshot <nom>
+# Restore a snapshot
+sudo timeshift --restore --snapshot <snapshot-name>
 ```
 
-Le système redémarre automatiquement après la restauration.
+The system reboots automatically after restoration.
 
-## Restic — Restauration depuis Hetzner
+## Restic — Restore from Hetzner
 
-Si le disque local `/mnt/timeshift` est perdu, restaurer depuis Hetzner.
+If the local `/mnt/timeshift` drive is lost, restore from Hetzner.
 
 ```bash
-# Lister les snapshots disponibles
-restic -r <repo-hetzner> snapshots
+# List available snapshots
+restic -r <hetzner-repo> snapshots
 
-# Restaurer vers un répertoire cible
-restic -r <repo-hetzner> restore <snapshot-id> --target /
+# Restore to target directory
+restic -r <hetzner-repo> restore <snapshot-id> --target /
 ```
 
-⚠️ La clé de chiffrement Restic est dans Vaultwarden.
+⚠️ The Restic encryption key is stored in Vaultwarden.

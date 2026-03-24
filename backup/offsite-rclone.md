@@ -1,33 +1,33 @@
-# Backup offsite — Borg → Hetzner via rclone
+# Offsite Backup — Borg → Hetzner via rclone
 
-## Rôle
+## Purpose
 
-Synchronisation du repo Borg local vers Hetzner Storage Box, chiffrée via rclone crypt.
+Sync the local Borg repository to Hetzner Storage Box, encrypted via rclone crypt.
 
-## Fonctionnement
+## How it works
 
 ```
-/mnt/backup/borg  →  rclone crypt  →  Hetzner Storage Box (hetzner-crypt:borg)
+/mnt/backup/borg  →  rclone crypt  →  Hetzner Storage Box
 ```
 
-- Sync incrémental : seuls les nouveaux blocs sont transférés
-- Chiffrement côté client : Hetzner ne voit que des données chiffrées
-- Clé de chiffrement rclone : stockée dans Vaultwarden
+- Incremental sync: only new blocks are transferred
+- Client-side encryption: Hetzner only sees encrypted data
+- rclone encryption key: stored in Vaultwarden
 
-## Configuration rclone
+## rclone configuration
 
-Fichier : `~/.config/rclone/rclone.conf`
+Config file: `~/.config/rclone/rclone.conf`
 
-Deux remotes configurés :
-- `hetzner` : remote SFTP vers la Storage Box
-- `hetzner-crypt` : remote crypt par-dessus `hetzner`
+Two remotes configured:
+- `hetzner`: SFTP remote pointing to the Storage Box
+- `hetzner-crypt`: crypt remote layered on top of `hetzner`
 
-## Commandes utiles
+## Useful commands
 
 ```bash
-# Lancer une sync manuelle
+# Manual sync
 rclone sync /mnt/backup/borg hetzner-crypt:borg --progress
 
-# Vérifier l'état
+# Check remote contents
 rclone ls hetzner-crypt:borg
 ```

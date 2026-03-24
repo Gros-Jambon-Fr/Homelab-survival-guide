@@ -1,36 +1,36 @@
-# Backup — Vue d'ensemble
+# Backup — Overview
 
-## Stratégie 3-2-1
+## 3-2-1 Strategy
 
-- **3** copies des données
-- **2** supports différents
-- **1** copie hors site
+- **3** copies of the data
+- **2** different storage media
+- **1** offsite copy
 
-## Ce qui est sauvegardé
+## What is backed up
 
-| Données | Outil | Local | Offsite |
+| Data | Tool | Local | Offsite |
 |---|---|---|---|
-| Snapshots système (OS + config) | Timeshift | ✅ `/mnt/timeshift` | ✅ Restic → Hetzner |
-| Données applicatives Docker | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner |
-| Configs système (fichiers hôte) | Git | ✅ Forgejo | — |
-| Passwords / secrets | Vaultwarden | ✅ (conteneur) | ✅ export chiffré ProtonMail |
+| System snapshots (OS + config) | Timeshift | ✅ `/mnt/timeshift` | ✅ Restic → Hetzner |
+| Docker application data | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner |
+| System config files (host) | Git | ✅ Self-hosted Git | — |
+| Passwords / secrets | Vaultwarden | ✅ (container) | ✅ Encrypted export via email |
 
-## Ce qui n'est PAS sauvegardé
+## What is NOT backed up
 
-- Les images Docker (reconstruites depuis les compose)
-- Les fichiers temporaires et caches
+- Docker images (rebuilt from compose files)
+- Temporary files and caches
 
-## Fréquence
+## Schedule
 
-| Outil | Fréquence | Rétention |
+| Tool | Frequency | Retention |
 |---|---|---|
-| Timeshift | Quotidien (timer systemd) | 7 jours |
-| Borg | À définir | 7 jours |
-| Restic (Timeshift → Hetzner) | Après chaque snapshot | `--keep-daily 7` |
-| rclone (Borg → Hetzner) | Après chaque backup Borg | Sync incrémental |
-| Vaultwarden export | Hebdomadaire (dimanche 20h) | Email ProtonMail |
+| Timeshift | Daily (systemd timer) | 7 days |
+| Borg | Configurable | 7 days |
+| Restic (Timeshift → Hetzner) | After each snapshot | `--keep-daily 7` |
+| rclone (Borg → Hetzner) | After each Borg backup | Incremental sync |
+| Vaultwarden export | Weekly (Sunday 8pm) | Email |
 
-## Détail par outil
+## Detailed documentation
 
 - [Timeshift](local-timeshift.md)
 - [Borg](local-borg.md)

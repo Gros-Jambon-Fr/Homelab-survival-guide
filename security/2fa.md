@@ -1,34 +1,34 @@
-# Stratégie 2FA
+# 2FA Strategy
 
-## Principe
+## Principle
 
-Le 2FA est activé partout où c'est possible. Les codes de récupération sont stockés dans Vaultwarden **et** imprimés/stockés hors ligne.
+2FA is enabled everywhere possible. Recovery codes are stored in Vaultwarden **and** kept offline.
 
-## Services avec 2FA physique (indépendant de Vaultwarden)
+## Services with physical 2FA (independent from Vaultwarden)
 
-Ces services sont accessibles même si Vaultwarden est indisponible :
+These services remain accessible even if Vaultwarden is unavailable:
 
-| Service | Méthode |
+| Service | Method |
 |---|---|
-| ProtonMail | Code de récupération offline + téléphone vérifié |
-| Addy.io | Code de récupération offline |
-| Vaultwarden | Code de récupération offline |
+| ProtonMail | Offline recovery code + verified phone |
+| Email alias provider | Offline recovery code |
+| Vaultwarden | Offline recovery code |
 
-## Services avec 2FA dans Vaultwarden
+## Services with 2FA stored in Vaultwarden
 
-| Service | Remarque |
+| Service | Note |
 |---|---|
-| OVH | Accessible via ProtonMail → VW |
-| Hetzner | Accessible via ProtonMail → VW |
-| Infisical | Accessible via ProtonMail → VW |
-| Forgejo | Accessible via ProtonMail → VW |
+| DNS provider | Accessible via ProtonMail → VW |
+| Cloud/VPS provider | Accessible via ProtonMail → VW |
+| Secrets manager | Accessible via ProtonMail → VW |
+| Self-hosted Git | Accessible via ProtonMail → VW |
 
-## Absence de 2FA
+## No 2FA
 
-| Service | Raison |
+| Service | Reason |
 |---|---|
-| Portainer | Non supporté — LAN/VPN uniquement |
+| Portainer | Not supported — LAN/VPN only |
 
-## Chaîne de récupération
+## Recovery chain
 
-ProtonMail est le point d'entrée de toute la chaîne. Voir [vaultwarden-chain.md](../restoration/vaultwarden-chain.md).
+ProtonMail is the entry point for the entire chain. See [vaultwarden-chain.md](../restoration/vaultwarden-chain.md).

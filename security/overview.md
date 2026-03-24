@@ -1,30 +1,30 @@
-# Sécurité — Vue d'ensemble
+# Security — Overview
 
-## Exposition réseau
+## Network exposure
 
-- Aucun service exposé sur internet
-- Tout accessible en LAN uniquement, ou via VPN WireGuard (Freebox Delta)
-- Reverse proxy Traefik avec certificats Let's Encrypt (OVH DNS challenge)
+- No service exposed to the internet
+- Everything accessible on LAN only, or via WireGuard VPN
+- Traefik reverse proxy with Let's Encrypt certificates (DNS challenge)
 
-## Accès au serveur
+## Server access
 
-- SSH par clé uniquement (pas de mot de passe)
-- Clé `id_ed25519` sauvegardée dans Vaultwarden
-- Accès physique : serveur chez soi
+- SSH by key only (no password authentication)
+- SSH key backed up in Vaultwarden
+- Physical access: server at home
 
-## Gestion des secrets
+## Secret management
 
-- [Vaultwarden](secrets.md) — passwords, clés SSH, exports chiffrés
-- [Infisical](secrets.md) — secrets applicatifs injectés au runtime dans les conteneurs
-- Jamais de secrets en dur dans les fichiers de config versionnés
+- [Vaultwarden](secrets.md) — passwords, SSH keys, encrypted exports
+- [Infisical](secrets.md) — application secrets injected at runtime into containers
+- No secrets hardcoded in versioned config files
 
-## Authentification forte
+## Strong authentication
 
-Voir [stratégie 2FA](2fa.md).
+See [2FA strategy](2fa.md).
 
-## Points de vigilance acceptés
+## Accepted risk points
 
-| Service | Risque | Justification |
+| Service | Risk | Justification |
 |---|---|---|
-| Portainer | Pas de 2FA | LAN/VPN uniquement, risque acceptable |
-| 2FA Forgejo/OVH/Hetzner dans Vaultwarden | Dépendance VW | Chaîne de récupération ProtonMail validée |
+| Portainer | No 2FA | LAN/VPN only, acceptable risk |
+| 2FA for Git/DNS/cloud providers stored in Vaultwarden | VW dependency | ProtonMail recovery chain validated and tested |

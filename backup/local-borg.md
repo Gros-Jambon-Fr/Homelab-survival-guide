@@ -1,30 +1,30 @@
-# Backup local — Borg
+# Local Backup — Borg
 
-## Rôle
+## Purpose
 
-Sauvegarde des données applicatives Docker. Borg offre déduplication, compression et chiffrement natifs.
+Backup of Docker application data. Borg provides native deduplication, compression and encryption.
 
-## Sources sauvegardées
+## Backed up sources
 
-- `/home/immich` — bibliothèque photos Immich
-- `/home/matthieu` — données utilisateur
-- `/home/Nextcloud` — données Nextcloud
+- `/home/immich` — Immich photo library
+- `/home/<user>` — user data
+- `/home/nextcloud` — Nextcloud data
 
 ## Configuration
 
-- Destination : `/mnt/backup` (HDD Seagate 4 To dédié)
-- Compression : lz4
-- Rétention : 7 jours
+- Destination: `/mnt/backup` (dedicated HDD)
+- Compression: lz4
+- Retention: 7 days
 
-## Commandes utiles
+## Useful commands
 
 ```bash
-# Lister les archives
+# List archives
 borg list /mnt/backup/borg
 
-# Voir le contenu d'une archive
-borg list /mnt/backup/borg::nom-archive
+# Browse an archive
+borg list /mnt/backup/borg::<archive-name>
 
-# Infos sur le repo
+# Repository info
 borg info /mnt/backup/borg
 ```

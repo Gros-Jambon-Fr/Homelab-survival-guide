@@ -1,42 +1,42 @@
-# Chaîne de récupération — Vaultwarden
+# Recovery Chain — Vaultwarden
 
-Vaultwarden est le coffre central. Cette page décrit comment y accéder même en cas de panne totale.
+Vaultwarden is the central vault. This page describes how to regain access even in the event of a total failure.
 
-## Principe
+## Principle
 
-ProtonMail est le seul service accessible **sans** Vaultwarden grâce à :
-- Une passphrase mémorisée / stockée hors ligne
-- Un téléphone vérifié (accès de secours)
+ProtonMail is the only service accessible **without** Vaultwarden, thanks to:
+- An offline passphrase (memorized or stored physically off-server)
+- A verified phone (backup access)
 
-C'est le point d'entrée de toute la chaîne de récupération.
+It is the entry point for the entire recovery chain.
 
-## Étape 1 — Accéder à ProtonMail sans Vaultwarden
+## Step 1 — Access ProtonMail without Vaultwarden
 
-- Via passphrase offline (mémorisée ou stockée physiquement hors du serveur)
-- Ou via téléphone vérifié
+- Via offline passphrase (memorized or stored physically)
+- Or via verified phone
 
-## Étape 2 — Récupérer l'export Vaultwarden
+## Step 2 — Retrieve the Vaultwarden export
 
-Un export chiffré est envoyé chaque dimanche à 20h sur ProtonMail.
+An encrypted export is sent every Sunday at 8pm to ProtonMail.
 
-Chercher l'email le plus récent avec l'export `encrypted_json`.
+Search for the most recent email with the `encrypted_json` export attached.
 
-## Étape 3 — Restaurer Vaultwarden
+## Step 3 — Restore Vaultwarden
 
-1. Déployer une instance Vaultwarden fraîche
-2. Importer l'export chiffré (format `encrypted_json`)
-3. Utiliser le mot de passe maître pour déchiffrer
+1. Deploy a fresh Vaultwarden instance
+2. Import the encrypted export (`encrypted_json` format)
+3. Use the master password to decrypt
 
-## Étape 4 — Récupérer les secrets
+## Step 4 — Retrieve all secrets
 
-Une fois Vaultwarden restauré :
-- Clés SSH → reconnexion au serveur / Forgejo / Hetzner
-- Clé rclone → accès au backup Borg sur Hetzner
-- Clé Restic → accès aux snapshots Timeshift sur Hetzner
-- 2FA OVH, Hetzner, Infisical, Forgejo → accès aux services externes
+Once Vaultwarden is restored:
+- SSH keys → reconnect to server / Git / cloud providers
+- rclone key → access Borg backup on Hetzner
+- Restic key → access Timeshift snapshots on Hetzner
+- 2FA for DNS, cloud, Git providers → access to external services
 
-## ⚠️ Points critiques
+## ⚠️ Critical points
 
-- Ne jamais stocker les codes de récupération ProtonMail **uniquement** dans Vaultwarden
-- Tester régulièrement l'accès ProtonMail sans Vaultwarden
-- Vérifier que l'export hebdomadaire arrive bien (surveiller les emails du dimanche)
+- Never store ProtonMail recovery codes **only** in Vaultwarden
+- Regularly test ProtonMail access without Vaultwarden
+- Verify that the weekly export email is arriving (check every Sunday)

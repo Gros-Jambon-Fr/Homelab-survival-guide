@@ -1,38 +1,38 @@
-# Restauration des données — Borg
+# Data Restoration — Borg
 
-## Depuis le backup local (`/mnt/backup`)
+## From local backup (`/mnt/backup`)
 
 ```bash
-# Lister les archives disponibles
+# List available archives
 borg list /mnt/backup/borg
 
-# Lister le contenu d'une archive
-borg list /mnt/backup/borg::<nom-archive>
+# Browse an archive
+borg list /mnt/backup/borg::<archive-name>
 
-# Restaurer une archive complète
+# Restore a full archive
 cd /
-borg extract /mnt/backup/borg::<nom-archive>
+borg extract /mnt/backup/borg::<archive-name>
 
-# Restaurer un chemin spécifique
-borg extract /mnt/backup/borg::<nom-archive> home/immich/
+# Restore a specific path
+borg extract /mnt/backup/borg::<archive-name> home/immich/
 ```
 
-## Depuis Hetzner (backup offsite)
+## From Hetzner (offsite backup)
 
-Si `/mnt/backup` est perdu, récupérer via rclone depuis Hetzner puis restaurer Borg.
+If `/mnt/backup` is lost, pull the Borg repo back from Hetzner first.
 
 ```bash
-# Synchroniser le repo Borg depuis Hetzner vers un disque local
+# Sync the Borg repo from Hetzner to a local drive
 rclone sync hetzner-crypt:borg /mnt/backup/borg --progress
 
-# Puis restaurer comme ci-dessus
+# Then restore as above
 borg list /mnt/backup/borg
 ```
 
-⚠️ La clé de chiffrement rclone est dans Vaultwarden.
+⚠️ The rclone encryption key is stored in Vaultwarden.
 
-## Sources sauvegardées
+## Backed up sources
 
 - `/home/immich`
-- `/home/matthieu`
-- `/home/Nextcloud`
+- `/home/<user>`
+- `/home/nextcloud`

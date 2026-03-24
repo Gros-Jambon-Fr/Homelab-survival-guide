@@ -1,33 +1,33 @@
 # Homelab Survival Guide
 
-Documentation de ma stratégie de résilience pour mon homelab : backup, sécurité, et procédures de restauration.
+Documentation of my homelab resilience strategy: backup, security, and restoration procedures.
 
-## Principe général — Stratégie 3-2-1
+## Core principle — 3-2-1 Backup Strategy
 
-| Copie | Emplacement | Technologie |
+| Copy | Location | Technology |
 |---|---|---|
-| Production | Disques internes (SSD + HDD) | — |
-| Backup local | Disques internes dédiés | Timeshift + Borg |
-| Backup offsite | Hetzner Storage Box (Allemagne) | rclone crypt + Restic |
+| Production | Internal drives (SSD + HDD) | — |
+| Local backup | Dedicated internal drives | Timeshift + Borg |
+| Offsite backup | Hetzner Storage Box (Germany) | rclone crypt + Restic |
 
 ## Structure
 
 ```
-backup/         → Ce qui est sauvegardé, où, et comment
-security/       → Accès, secrets, 2FA
-restoration/    → Procédures de restauration par scénario
-scripts/        → Scripts utilitaires (à venir)
+backup/         → What is backed up, where, and how
+security/       → Access, secrets, 2FA
+restoration/    → Step-by-step restoration procedures by scenario
+scripts/        → Utility scripts (coming soon)
 ```
 
 ## Infrastructure
 
-- Serveur : HP EliteDesk 800 G2 SFF — Intel i5-6500, 16 Go RAM, Debian 13
-- ~40 conteneurs Docker
-- Accès distant : VPN WireGuard
-- Reverse proxy : Traefik
+- Server: x86 mini PC running Debian
+- ~40 Docker containers
+- Remote access: WireGuard VPN
+- Reverse proxy: Traefik
 
-## Navigation rapide
+## Quick navigation
 
-- [Vue d'ensemble backup](backup/overview.md)
-- [Par où commencer en cas de panne](restoration/overview.md)
-- [Chaîne de récupération des secrets](restoration/vaultwarden-chain.md)
+- [Backup overview](backup/overview.md)
+- [Where to start when things go wrong](restoration/overview.md)
+- [Secret recovery chain](restoration/vaultwarden-chain.md)

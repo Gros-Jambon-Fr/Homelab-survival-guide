@@ -1,29 +1,23 @@
-# Gestion des secrets
+# Secret Management
 
-## Vaultwarden (passwords & secrets personnels)
+## Vaultwarden (passwords & personal secrets)
 
-Instance auto-hébergée. Stocke :
-- Passwords de tous les services
-- Clés SSH
-- Clés de chiffrement (rclone, Restic)
-- Codes 2FA de récupération
-- Export chiffré hebdomadaire envoyé par email (ProtonMail)
+Self-hosted instance. Stores:
+- Passwords for all services
+- SSH keys
+- Encryption keys (rclone, Restic)
+- 2FA recovery codes
+- Weekly encrypted export sent by email
 
-⚠️ Point critique : si Vaultwarden est inaccessible, voir la [chaîne de récupération](../restoration/vaultwarden-chain.md).
+⚠️ Critical point: if Vaultwarden is unavailable, see the [recovery chain](../restoration/vaultwarden-chain.md).
 
-## Infisical (secrets applicatifs)
+## Infisical (application secrets)
 
-Secrets injectés au runtime dans les conteneurs Docker via machine identity.
-Utilisé dans les workflows CI/CD Forgejo Actions.
+Secrets injected at runtime into Docker containers via machine identity.
+Used in CI/CD workflows.
 
-Variables disponibles dans les workflows :
-- `INFISICAL_CLIENT_ID`
-- `INFISICAL_CLIENT_SECRET`
-- `INFISICAL_PROJECT_ID`
-- `INFISICAL_DOMAIN`
+## Rules
 
-## Règles
-
-- Jamais de secret en dur dans un fichier versionné
-- Jamais de secret partagé dans le chat ou par email en clair
-- Les configs système versionnées dans `homelab-config` ont les valeurs sensibles remplacées par `REDACTED`
+- Never hardcode secrets in versioned files
+- Never share secrets in chat or plain-text email
+- System config files versioned in the configs repo have sensitive values replaced with `REDACTED`
