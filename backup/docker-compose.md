@@ -28,7 +28,7 @@ Application data (appdata)     /opt/docker/appdata/          ← NOT in Git
 | Borg | ❌ | Only backs up specific user data directories |
 | Git | ❌ | Source files only, not runtime data |
 
-⚠️ **Implication**: if the system drive fails and the latest Timeshift snapshot is outdated, appdata changes since the last snapshot may be lost. This is an accepted trade-off.
+Timeshift runs daily and snapshots are synced offsite to Hetzner via Restic, so the maximum data loss window is less than 24 hours.
 
 ## Restoring a service
 

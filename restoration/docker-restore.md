@@ -44,10 +44,6 @@ docker compose up -d
 # adapt to your own structure
 ```
 
-## ⚠️ Data loss risk
+## Data loss window
 
-appdata is only covered by Timeshift — not by Borg or any offsite backup.
-
-If the system drive is unrecoverable and the latest Timeshift snapshot did not sync to Hetzner via Restic in time, appdata changes since the last successful snapshot will be lost.
-
-Consider adding critical appdata paths to Borg if data loss is not acceptable for a specific service.
+appdata is covered by Timeshift (daily) synced offsite to Hetzner via Restic. The maximum data loss window is less than 24 hours.
