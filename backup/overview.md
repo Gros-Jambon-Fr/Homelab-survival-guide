@@ -10,8 +10,9 @@
 
 | Data | Tool | Local | Offsite |
 |---|---|---|---|
-| System snapshots (OS + config) | Timeshift | ✅ `/mnt/timeshift` | ✅ Restic → Hetzner |
-| Docker application data | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner |
+| System snapshots (OS + config + appdata) | Timeshift | ✅ `/mnt/timeshift` | ✅ Restic → Hetzner |
+| User/app data (Immich, Nextcloud, etc.) | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner |
+| Docker compose files | Git | ✅ Self-hosted Git | — |
 | System config files (host) | Git | ✅ Self-hosted Git | — |
 | Passwords / secrets | Vaultwarden | ✅ (container) | ✅ Encrypted export via email |
 
@@ -36,3 +37,4 @@
 - [Borg](local-borg.md)
 - [rclone → Hetzner](offsite-rclone.md)
 - [Restic → Hetzner](offsite-restic.md)
+- [Docker compose files](docker-compose.md)
