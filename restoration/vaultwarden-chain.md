@@ -24,6 +24,8 @@ The Vaultwarden master password is the only credential kept solely in memory. Ev
 
 **Note:** Using the ProtonMail passphrase to log in automatically disables 2FA on the account (per Proton's own documentation). 2FA must be re-enabled after recovery. This means a single paper credential is sufficient to regain ProtonMail access even without a phone.
 
+**Why the passphrase matters more than a phone number:** Proton offers multiple account recovery methods, but only the passphrase recovers both account access *and* existing data. SMS/phone recovery resets the password but leaves all existing emails unreadable — they are encrypted with a key derived from the old password. Without the passphrase, you could log back in but the weekly Vaultwarden export sitting in your inbox would be inaccessible.
+
 ## Step 1 — Access ProtonMail without Vaultwarden
 
 Use the offline passphrase (stored physically). Per Proton's design, this bypasses and disables 2FA — no recovery code needed.
