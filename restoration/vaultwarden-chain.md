@@ -4,16 +4,31 @@ Vaultwarden is the central vault. This page describes how to regain access even 
 
 ## Principle
 
-ProtonMail is the only service accessible **without** Vaultwarden, thanks to:
-- An offline passphrase (memorized or stored physically off-server)
-- A verified phone (backup access)
+ProtonMail is the only service accessible **without** Vaultwarden, thanks to an offline passphrase stored physically off-server. It is the entry point for the entire recovery chain.
 
-It is the entry point for the entire recovery chain.
+The critical services (ProtonMail, email alias provider, Vaultwarden, cloud/VPS provider) use a phone-based TOTP app, not Vaultwarden — eliminating any circular dependency.
+
+## Physical emergency kit
+
+The minimum viable credential set that lives entirely outside any digital vault:
+
+| What | Format | Purpose |
+|---|---|---|
+| ProtonMail passphrase | Paper (offline) | Entry point — access ProtonMail without phone |
+| 2FA recovery code — email alias provider | Paper (offline) | Bypass TOTP if phone is unavailable |
+| 2FA recovery code — Vaultwarden | Paper (offline) | Bypass TOTP if phone is unavailable |
+| 2FA recovery code — cloud/VPS provider | Paper (offline) | Bypass TOTP if phone is unavailable |
+| Vaultwarden master password | Memorized | Decrypt the weekly export |
+
+The Vaultwarden master password is the only credential kept solely in memory. Everything else in the vault can be reconstructed from the weekly export once decrypted.
+
+**Note:** Using the ProtonMail passphrase to log in automatically disables 2FA on the account (per Proton's own documentation). 2FA must be re-enabled after recovery. This means a single paper credential is sufficient to regain ProtonMail access even without a phone.
 
 ## Step 1 — Access ProtonMail without Vaultwarden
 
-- Via offline passphrase (memorized or stored physically)
-- Or via verified phone
+Use the offline passphrase (stored physically). Per Proton's design, this bypasses and disables 2FA — no recovery code needed.
+
+If the phone is available: use Proton Authenticator (TOTP) as normal.
 
 ## Step 2 — Retrieve the Vaultwarden export
 
@@ -37,6 +52,7 @@ Once Vaultwarden is restored:
 
 ## ⚠️ Critical points
 
-- Never store ProtonMail recovery codes **only** in Vaultwarden
+- Never store ProtonMail 2FA **only** in Vaultwarden — it would create a circular dependency
 - Regularly test ProtonMail access without Vaultwarden
 - Verify that the weekly export email is arriving (check every Sunday)
+- The weekly export is only as useful as the master password — keep it memorized

@@ -6,13 +6,14 @@
 
 ## Services with physical 2FA (independent from Vaultwarden)
 
-These services remain accessible even if Vaultwarden is unavailable:
+These four services use a phone-based TOTP app (not Vaultwarden) and have offline recovery codes stored physically. They remain fully accessible even if Vaultwarden is unavailable.
 
-| Service | Method |
-|---|---|
-| ProtonMail | Offline recovery code + verified phone |
-| Email alias provider | Offline recovery code |
-| Vaultwarden | Offline recovery code |
+| Service | TOTP | Offline fallback |
+|---|---|---|
+| ProtonMail | Phone (TOTP app) | Account passphrase (disables 2FA per Proton docs) |
+| Email alias provider | Phone (TOTP app) | Recovery code (paper) |
+| Vaultwarden | Phone (TOTP app) | Recovery code (paper) |
+| Cloud/VPS provider | Phone (TOTP app) | Recovery code (paper) |
 
 ## Services with 2FA stored in Vaultwarden
 
