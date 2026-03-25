@@ -32,7 +32,7 @@ If the phone is available: use Proton Authenticator (TOTP) as normal.
 
 ## Step 2 — Retrieve the Vaultwarden export
 
-An encrypted export is sent every Sunday at 8pm to ProtonMail.
+An encrypted export is sent weekly to ProtonMail.
 
 Search for the most recent email with the `encrypted_json` export attached.
 
