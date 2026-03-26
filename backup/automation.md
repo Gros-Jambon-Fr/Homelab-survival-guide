@@ -45,9 +45,9 @@ Timeshift local snapshot
 
 Encrypted JSON export sent by email. See [recovery chain](../restoration/vaultwarden-chain.md).
 
-### Weekly host reboot (Monday, 1am)
+### Weekly host update & reboot (Monday, 1am)
 
-Triggered 1 hour before the weekly backup to ensure a clean state.
+System packages are updated first, then the host reboots. The reboot is triggered 1 hour before the weekly backup to ensure a clean state. If the update fails, the reboot is skipped.
 
 ## Chain logic
 
@@ -83,6 +83,7 @@ scripts/
 ├── system/
 │   ├── daily_disk_usage_check.sh
 │   ├── daily_updates_check.sh
+│   ├── weekly_host_update.sh
 │   └── weekly_host_reboot.sh
 ├── containers/
 │   ├── daily_containers_updates_check.sh
