@@ -2,7 +2,7 @@
 
 ## Overview
 
-All backup tasks run automatically inside a dedicated Docker container using a self-hosted workflow orchestrator ([xyOps](https://github.com/nicholaswilde/xyops) — a cron-based event scheduler with a web UI).
+All backup tasks run automatically inside a dedicated Docker container using a self-hosted workflow orchestrator ([xyOps](https://www.xyops.io/) — a schedule-based event scheduler with a web UI).
 
 The automation scripts are versioned in a dedicated Git repository, separate from the compose files.
 
