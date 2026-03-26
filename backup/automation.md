@@ -47,7 +47,7 @@ Encrypted JSON export sent by email. See [recovery chain](../restoration/vaultwa
 
 ### Weekly host update & reboot (Monday, 1am)
 
-System packages are updated first, then the host reboots. The reboot is triggered 1 hour before the weekly backup to ensure a clean state. If the update fails, the reboot is skipped.
+The host reboots weekly, 1 hour before the weekly backup to ensure a clean state. System package updates are triggered manually via a separate web UI ([script-server](https://github.com/bugy/script-server)) running directly on the host — keeping manual oversight over what gets installed.
 
 ## Chain logic
 
