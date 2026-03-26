@@ -41,7 +41,7 @@ Timeshift local snapshot
                                    └──→ Timeshift snapshot count check (monitoring only)
 ```
 
-### Weekly Vaultwarden export (Sunday, 8pm)
+### Weekly Vaultwarden export
 
 Encrypted JSON export sent by email. See [recovery chain](../restoration/vaultwarden-chain.md).
 
