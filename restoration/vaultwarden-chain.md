@@ -51,6 +51,7 @@ Once Vaultwarden is restored:
 - rclone key → access Borg backup on Hetzner
 - Restic key → access Timeshift snapshots on Hetzner
 - 2FA for DNS, cloud, Git providers → access to external services
+- Infisical machine identity credentials (`claude-code` clientId + clientSecret) → recreate `/home/matthieu/.config/infisical-claude` (chmod 600) on the server — required for Claude Code tooling and `manual_xyops_update.sh`
 
 ## ⚠️ Critical points
 

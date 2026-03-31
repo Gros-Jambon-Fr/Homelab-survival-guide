@@ -12,7 +12,8 @@
 1. Reinstall Debian
 2. Restore system config files from the configs repo → [Config restoration](configs-restore.md)
 3. Restore application data from Borg → [Borg restoration](data-restore.md)
-4. Bring Docker containers back up from compose files → [Docker restoration](docker-restore.md)
+4. Recreate `/home/matthieu/.config/infisical-claude` (chmod 600) from Vaultwarden credentials
+5. Bring Docker containers back up via CI/CD (Forgejo Actions — uses `infisical run` to inject secrets) → [Docker restoration](docker-restore.md)
 
 ### Scenario 4 — Server completely unrecoverable (theft, fire, etc.)
 1. New hardware + reinstall Debian
@@ -20,7 +21,8 @@
 3. Retrieve encryption keys (rclone, Restic) from Vaultwarden
 4. Restore from Hetzner (Borg via rclone / Timeshift via Restic)
 5. Restore system configs from the configs repo
-6. Bring Docker containers back up from compose files → [Docker restoration](docker-restore.md)
+6. Recreate `/home/matthieu/.config/infisical-claude` (chmod 600) from Vaultwarden credentials
+7. Bring Docker containers back up via CI/CD (Forgejo Actions — uses `infisical run` to inject secrets) → [Docker restoration](docker-restore.md)
 
 ### Scenario 5 — Lost access to Vaultwarden only
 → [Vaultwarden recovery chain](vaultwarden-chain.md)

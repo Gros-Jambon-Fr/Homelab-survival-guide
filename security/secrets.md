@@ -23,7 +23,11 @@ Two stacks cannot use Infisical due to circular dependencies — they use a loca
 - **Infisical itself** — cannot pull its own secrets from itself
 - **Traefik** — if Traefik is down, Infisical is unreachable; the OVH DNS credentials needed to restart Traefik would be inaccessible if stored in Infisical
 
-These are the only two exceptions. All other stacks use Infisical exclusively.
+One additional bootstrap file exists for tooling access:
+
+- **`/home/matthieu/.config/infisical-claude`** (`chmod 600`, outside of Git) — machine identity credentials (`claude-code`) used by Claude Code to authenticate to Infisical and retrieve any secret at runtime. This is the single entry point for all non-container secret access (Planka API, xyOps API, Forgejo token, HA token, etc.).
+
+These are the only exceptions. All other stacks use Infisical exclusively.
 
 ## Rules
 
