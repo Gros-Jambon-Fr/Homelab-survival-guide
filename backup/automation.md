@@ -74,20 +74,25 @@ scripts/
 │   ├── daily_borg_cloud_backup.sh
 │   ├── daily_borg_local_count_check.sh
 │   ├── daily_borg_local_integrity_check.sh
+│   ├── weekly_borg_local_integrity_check.sh
 │   ├── daily_timeshift_local_snapshot.sh
 │   ├── daily_timeshift_cloud_snapshot.sh
 │   ├── daily_timeshift_local_count_check.sh
 │   ├── daily_timeshift_local_integrity_check.sh
-│   ├── weekly_borg_integrity_check.sh
+│   ├── weekly_timeshift_local_integrity_check.sh
 │   └── weekly_timeshift_cloud_integrity_check.sh
 ├── system/
-│   ├── daily_disk_usage_check.sh
-│   ├── daily_updates_check.sh
+│   ├── daily_disks_usage_check.sh
+│   ├── daily_host_updates_check.sh
+│   ├── daily_host_uptime_check.sh
 │   ├── weekly_host_update.sh
 │   └── weekly_host_reboot.sh
 ├── containers/
 │   ├── daily_containers_updates_check.sh
-│   └── weekly_containers_update.sh
+│   ├── daily_containers_last_update_check.sh
+│   ├── daily_gluetun_vpn_check.sh
+│   ├── weekly_containers_update.sh
+│   └── weekly_dockcheck_update_check.sh
 └── personal/
     └── weekly_vaultwarden_export.sh
 ```
