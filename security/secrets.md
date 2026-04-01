@@ -25,7 +25,7 @@ Two stacks cannot use Infisical due to circular dependencies — they use a loca
 
 One additional bootstrap file exists for tooling access:
 
-- **`/home/matthieu/.config/infisical-claude`** (`chmod 600`, outside of Git) — machine identity credentials (`claude-code`) used by Claude Code to authenticate to Infisical and retrieve any secret at runtime. This is the single entry point for all non-container secret access (Planka API, xyOps API, Forgejo token, HA token, etc.).
+- **`/home/<user>/.config/infisical-claude`** (`chmod 600`, outside of Git) — machine identity credentials (`claude-code`) used by Claude Code to authenticate to Infisical and retrieve any secret at runtime. This is the single entry point for all non-container secret access (Planka API, xyOps API, Forgejo token, HA token, etc.).
 
 These are the only exceptions. All other stacks use Infisical exclusively.
 
