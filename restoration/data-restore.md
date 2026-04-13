@@ -35,4 +35,4 @@ borg list /mnt/backup/borg
 
 - `/home/immich`
 - `/home/<user>`
-- `/home/nextcloud`
+- `/home/opencloud`
