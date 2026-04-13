@@ -51,7 +51,7 @@ Once Vaultwarden is restored:
 - rclone key → access Borg backup on Hetzner
 - Restic key → access Timeshift snapshots on Hetzner
 - 2FA for DNS, cloud, Git providers → access to external services
-- Infisical admin credentials → log into Infisical UI, generate a new client secret for the local admin machine identity, recreate `/home/<user>/.config/infisical-claude` (chmod 600) on the server — required for local admin tooling and `manual_xyops_update.sh`
+- Infisical admin credentials → log into Infisical UI, generate a new client secret for the local admin machine identity, recreate `/home/<user>/.config/infisical-admin` (chmod 600) on the server — required for local admin tooling and `manual_xyops_update.sh`
 
 ## ⚠️ Critical points
 
