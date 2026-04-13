@@ -8,7 +8,7 @@ Backup of Docker application data. Borg provides native deduplication, compressi
 
 - `/home/immich` — Immich photo library
 - `/home/<user>` — user data
-- `/home/nextcloud` — Nextcloud data
+- `/home/opencloud` — OpenCloud data
 - `/home/music` — music library
 
 ## Configuration

@@ -22,6 +22,10 @@
 
 See [2FA strategy](2fa.md).
 
+## Container hardening
+
+All containers run with `cap_drop: ALL` — Linux capabilities are dropped by default and re-added only when strictly required (e.g. `SETUID`/`SETGID` for services that drop privileges, `NET_BIND_SERVICE` for services binding low ports). Containers using `privileged: true` (e.g. system monitoring agents) are excluded from this rule.
+
 ## Accepted risk points
 
 | Service | Risk | Justification |

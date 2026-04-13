@@ -30,6 +30,8 @@ Application data (appdata)     /opt/docker/appdata/          ← NOT in Git
 
 Timeshift runs daily and snapshots are synced offsite to Hetzner via Restic, so the maximum data loss window is less than 24 hours.
 
+> **Note:** A shared PostgreSQL instance (`homelab-postgres`) hosts databases for several services (notes, kanban). This data lives in `appdata` and is covered by Timeshift only — not by Borg. The same 24-hour loss window applies.
+
 ## Restoring a service
 
 To bring a service back up:
