@@ -7,12 +7,12 @@ All backup tasks run automatically inside a dedicated Docker container using a s
 The automation scripts are versioned in a dedicated Git repository, separate from the compose files.
 
 ```
-Git repo (scripts)  ←→  xyOps container  →  Borg / Timeshift / Restic / rclone
+Git repo (scripts)  ←→  xyOps container  →  Borg / Timeshift / rclone
 ```
 
 ## Why run scripts inside a container?
 
-The backup container uses `nsenter` to access host binaries and filesystems without running privileged scripts directly on the host. This keeps the host clean while still allowing full access to system tools (Borg, Timeshift, rclone, Restic).
+The backup container uses `nsenter` to access host binaries and filesystems without running privileged scripts directly on the host. This keeps the host clean while still allowing full access to system tools (Borg, Timeshift, rclone).
 
 ## Workflow schedule
 
@@ -24,22 +24,13 @@ Borg local backup
                          └──→ Borg archive count check (monitoring only)
 
 Timeshift local snapshot
-  → Timeshift integrity check ──→ Timeshift cloud snapshot (Restic → Hetzner)
-                              └──→ Timeshift snapshot count check (monitoring only)
+  → Timeshift integrity check → Timeshift snapshot count check
 ```
 
 ### Weekly backup (Monday, 2am)
 
 Same as daily, with additional steps:
 - Full Borg integrity check (instead of quick daily check)
-- Full Timeshift cloud integrity check (Restic) — runs **after** the cloud snapshot
-
-```
-Timeshift local snapshot
-  → Full Timeshift integrity check ──→ Timeshift cloud snapshot
-                                   │     → Timeshift cloud integrity check
-                                   └──→ Timeshift snapshot count check (monitoring only)
-```
 
 ### Weekly Vaultwarden export
 
@@ -55,7 +46,7 @@ Backup workflows use two types of chaining:
 
 **Success chaining** — if a step fails, the rest of the chain is aborted. Used for action steps (local backup, integrity check, cloud sync). This prevents sending a corrupted or missing backup to the cloud.
 
-**Monitoring steps** (count checks) are **leaf nodes** — they run in parallel with the cloud sync, log a warning if days are missing, but never block the cloud backup. Their role is observability, not gating. Alerting will eventually be handled by Grafana once a database is provisioned.
+**Monitoring steps** (count checks) run after the integrity check and log a warning if archives are missing, but never block the cloud sync. Their role is observability, not gating.
 
 Monitoring tasks outside backup workflows (disk usage, uptime, container updates) use **complete chaining** — they always run regardless of the previous step's result.
 
@@ -76,11 +67,9 @@ scripts/
 │   ├── daily_borg_local_integrity_check.sh
 │   ├── weekly_borg_local_integrity_check.sh
 │   ├── daily_timeshift_local_snapshot.sh
-│   ├── daily_timeshift_cloud_snapshot.sh
 │   ├── daily_timeshift_local_count_check.sh
 │   ├── daily_timeshift_local_integrity_check.sh
-│   ├── weekly_timeshift_local_integrity_check.sh
-│   └── weekly_timeshift_cloud_integrity_check.sh
+│   └── weekly_timeshift_local_integrity_check.sh
 ├── system/
 │   ├── daily_disks_usage_check.sh
 │   ├── daily_host_updates_check.sh

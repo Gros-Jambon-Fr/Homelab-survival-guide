@@ -5,7 +5,7 @@
 ### Scenario 1 — Rollback after a bad update or system mistake
 → [Timeshift restoration](system-restore.md#timeshift)
 
-### Scenario 2 — Loss of application data (Immich, Nextcloud, etc.)
+### Scenario 2 — Loss of application data (Immich, OpenCloud, etc.)
 → [Borg restoration](data-restore.md)
 
 ### Scenario 3 — Dead system drive
@@ -18,9 +18,9 @@
 ### Scenario 4 — Server completely unrecoverable (theft, fire, etc.)
 1. New hardware + reinstall Debian
 2. **Regain access to Vaultwarden** → [Recovery chain](vaultwarden-chain.md)
-3. Retrieve encryption keys (rclone, Restic) from Vaultwarden
-4. Restore from Hetzner (Borg via rclone / Timeshift via Restic)
-5. Restore system configs from the configs repo
+3. Retrieve rclone encryption key from Vaultwarden
+4. Restore Borg repo from Hetzner → [Data restoration](data-restore.md#from-hetzner-offsite-backup)
+5. Restore system configs from the configs repo → [Config restoration](configs-restore.md)
 6. Recreate `/home/<user>/.config/infisical-admin` (chmod 600) from Vaultwarden — machine identity credentials for local admin tooling
 7. Bring Docker containers back up via CI/CD (Forgejo Actions — uses `infisical run` to inject secrets) → [Docker restoration](docker-restore.md)
 

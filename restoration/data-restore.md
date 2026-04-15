@@ -15,6 +15,7 @@ borg extract /mnt/backup/borg::<archive-name>
 
 # Restore a specific path
 borg extract /mnt/backup/borg::<archive-name> home/immich/
+borg extract /mnt/backup/borg::<archive-name> opt/docker/appdata/
 ```
 
 ## From Hetzner (offsite backup)
@@ -33,6 +34,10 @@ borg list /mnt/backup/borg
 
 ## Backed up sources
 
+- `/etc` — system configuration
+- `/opt` — Docker appdata, compose files, script-server
+- `/root` — root home directory
 - `/home/immich`
 - `/home/<user>`
 - `/home/opencloud`
+- `/home/music`

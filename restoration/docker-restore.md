@@ -3,28 +3,29 @@
 ## Prerequisites
 
 - Compose files available (from Git repo)
-- appdata restored from Timeshift (or accepted as partially lost)
+- appdata restored from Borg (see below)
 - Docker installed and running
 
-## Step 1 — Restore appdata from Timeshift
+## Step 1 — Restore appdata from Borg
 
-appdata (`/opt/docker/appdata/`) is covered by Timeshift snapshots only.
-
-```bash
-# List available snapshots
-sudo timeshift --list
-
-# Restore the most recent snapshot
-sudo timeshift --restore --snapshot <snapshot-name>
-```
-
-Or restore a specific path only (without full system rollback):
+appdata (`/opt/docker/appdata/`) is part of the `/opt` Borg source.
 
 ```bash
-# Mount a snapshot and copy appdata manually
-ls /run/timeshift/backup/timeshift-linux/snapshots/
-cp -a /run/timeshift/backup/timeshift-linux/snapshots/<snapshot>/localhost/opt/docker/appdata /opt/docker/
+# List available archives
+borg list /mnt/backup/borg
+
+# Restore appdata only
+cd /
+borg extract /mnt/backup/borg::<archive-name> opt/docker/appdata/
 ```
+
+If `/mnt/backup` is unavailable, pull from Hetzner first:
+
+```bash
+rclone sync hetzner-crypt:borg /mnt/backup/borg --progress
+```
+
+See [Data restoration](data-restore.md) for full details.
 
 ## Step 2 — Clone the compose repo
 
@@ -46,4 +47,4 @@ docker compose up -d
 
 ## Data loss window
 
-appdata is covered by Timeshift (daily) synced offsite to Hetzner via Restic. The maximum data loss window is less than 24 hours.
+appdata is covered by Borg (daily) synced offsite to Hetzner via rclone crypt. The maximum data loss window is less than 24 hours.

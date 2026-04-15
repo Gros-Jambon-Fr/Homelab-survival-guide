@@ -10,14 +10,14 @@
 
 | Data | Tool | Local | Offsite |
 |---|---|---|---|
-| System snapshots (OS + config + appdata) | Timeshift | ✅ `/mnt/timeshift` | ✅ Restic → Hetzner Storage Box |
-| User/app data (Immich, OpenCloud, etc.) | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner Storage Box |
+| User/app data, appdata, system config | Borg | ✅ `/mnt/backup` | ✅ rclone crypt → Hetzner Storage Box |
+| System rollback snapshots (OS) | Timeshift | ✅ `/mnt/timeshift` | — |
 | Docker compose files | Git | ✅ Self-hosted Git | — |
 | Automation scripts | Git | ✅ Self-hosted Git | — |
 | System config files (host) | Git | ✅ Self-hosted Git | — |
 | Passwords / secrets | Vaultwarden | ✅ (container) | ✅ Encrypted export via email |
 
-> Both offsite syncs target the **same Hetzner Storage Box**, in separate directories — Borg data via rclone crypt, Timeshift snapshots via Restic.
+> Offsite backup targets a **Hetzner Storage Box** via rclone crypt (client-side encryption). Timeshift is local only — it is a rollback tool, not a disaster recovery solution.
 
 ## What is NOT backed up
 
@@ -28,17 +28,15 @@
 
 | Tool | Frequency | Retention |
 |---|---|---|
-| Timeshift | Daily (systemd timer) | 7 days |
-| Borg | Configurable | 7 days |
-| Restic (Timeshift → Hetzner Storage Box) | After each snapshot | `--keep-daily 7` |
+| Timeshift | Daily (systemd timer) | 7 days (local only) |
+| Borg | Daily | 7 days |
 | rclone (Borg → Hetzner Storage Box) | After each Borg backup | Incremental sync |
-| Vaultwarden export | Weekly (Sunday 8pm) | Email |
+| Vaultwarden export | Weekly | Email |
 
 ## Detailed documentation
 
 - [Timeshift](local-timeshift.md)
 - [Borg](local-borg.md)
 - [rclone → Hetzner Storage Box](offsite-rclone.md) — Borg data, encrypted
-- [Restic → Hetzner Storage Box](offsite-restic.md) — Timeshift snapshots
 - [Docker compose files](docker-compose.md)
 - [Backup automation](automation.md)

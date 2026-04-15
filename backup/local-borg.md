@@ -2,10 +2,13 @@
 
 ## Purpose
 
-Backup of Docker application data. Borg provides native deduplication, compression and encryption.
+Backup of user data, Docker application data, and system configuration. Borg provides native deduplication, compression and encryption.
 
 ## Backed up sources
 
+- `/etc` — system configuration (network, SSH, Docker daemon, crontabs, systemd units…)
+- `/opt` — Docker appdata, compose files, script-server
+- `/root` — root home directory
 - `/home/immich` — Immich photo library
 - `/home/<user>` — user data
 - `/home/opencloud` — OpenCloud data
@@ -16,6 +19,7 @@ Backup of Docker application data. Borg provides native deduplication, compressi
 - Destination: `/mnt/backup` (dedicated HDD)
 - Compression: lz4
 - Retention: 7 days
+- Exclusion: `/etc/machine-id` (machine-specific, must be regenerated on new hardware)
 
 ## Useful commands
 
