@@ -8,7 +8,7 @@ Documentation of my homelab resilience strategy: backup, security, and restorati
 |---|---|---|
 | Production | Internal drives (SSD + HDD) | — |
 | Local backup | Dedicated internal drives | Timeshift + Borg |
-| Offsite backup | Hetzner Storage Box (Germany) | rclone crypt + Restic |
+| Offsite backup | Hetzner Storage Box (Germany) | Borg + rclone crypt |
 
 ## Structure
 

@@ -14,16 +14,19 @@ sudo timeshift --restore --snapshot <snapshot-name>
 
 The system reboots automatically after restoration.
 
-## Restic — Restore from Hetzner
+## Borg — Restore from Hetzner
 
-If the local `/mnt/timeshift` drive is lost, restore from Hetzner.
+If the local `/mnt/backup` drive is lost, restore from Hetzner via rclone + Borg.
 
 ```bash
-# List available snapshots
-restic -r <hetzner-repo> snapshots
+# Sync Borg repo from Hetzner to a local directory
+rclone sync hetzner-crypt:borg /mnt/backup --config ~/.config/rclone/rclone.conf
 
-# Restore to target directory
-restic -r <hetzner-repo> restore <snapshot-id> --target /
+# List available archives
+borg list /mnt/backup/borg
+
+# Restore a specific archive
+borg extract /mnt/backup/borg::<archive-name> --target /
 ```
 
-⚠️ The Restic encryption key is stored in Vaultwarden.
+⚠️ The rclone encryption key is stored in Vaultwarden.

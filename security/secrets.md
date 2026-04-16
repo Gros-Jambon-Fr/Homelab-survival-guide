@@ -5,7 +5,7 @@
 Self-hosted instance. Stores:
 - Passwords for all services
 - SSH keys
-- Encryption keys (rclone, Restic)
+- Encryption keys (rclone)
 - 2FA recovery codes
 - Weekly encrypted export sent by email
 
