@@ -1,5 +1,11 @@
 # Data Restoration — Borg
 
+The Borg repository is encrypted with `repokey-blake2`. The passphrase is required for every command — retrieve it from Vaultwarden before starting.
+
+```bash
+export BORG_PASSPHRASE="<passphrase from Vaultwarden>"
+```
+
 ## From local backup (`/mnt/backup`)
 
 ```bash
@@ -22,15 +28,17 @@ borg extract /mnt/backup/borg::<archive-name> opt/docker/appdata/
 
 If `/mnt/backup` is lost, pull the Borg repo back from Hetzner first.
 
+The offsite copy has two layers of encryption: Borg's own `repokey-blake2` + rclone crypt on top. To restore, you need both the rclone encryption key (in Vaultwarden) and the Borg passphrase (also in Vaultwarden).
+
 ```bash
 # Sync the Borg repo from Hetzner to a local drive
 rclone sync hetzner-crypt:borg /mnt/backup/borg --progress
 
-# Then restore as above
+# Then restore as above (BORG_PASSPHRASE must be set)
 borg list /mnt/backup/borg
 ```
 
-⚠️ The rclone encryption key is stored in Vaultwarden.
+⚠️ Both the rclone encryption key and the Borg passphrase are stored in Vaultwarden.
 
 ## Backed up sources
 
